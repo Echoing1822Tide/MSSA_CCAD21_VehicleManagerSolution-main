@@ -80,40 +80,37 @@ public class MainMenu
             }
         }
     }
-
+    private string[] GetMenuOptions()
+    {
+        return new string[] {
+            "Add a Vehicle",
+            "Show Vehicles",
+            "Exit"
+        };
+    }
     //handle user choice
     private async Task<bool> HandleMenuChoiceAsync(int choice)
     {
         switch (choice)
         {
             case 1:
-                VehicleTest();
+                AddAVehicle();
                 break;
             case 2:
-                ShowInputHelpers();
+                ShowVehicles();
                 break;
             case 3:
-                // Exit
+                Exit();
                 return false;
             default:
                 Console.WriteLine("Invalid choice.");
                 break;
         }
-
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
         return true;
     }
-
     //get menu options
-    private string[] GetMenuOptions()
-    {
-        return new string[] {
-            "Vehicle Test",
-            "Show Input Helpers",
-            "Exit"
-        };
-    }
     private void VehicleTest()
     {
         var myVehicle = new Vehicle(1969, "Oldsmobile", "Cutlass 442", 50000, false);
@@ -131,5 +128,17 @@ public class MainMenu
         Console.WriteLine(ConsoleHelpers.OutputHelpers.BoxedMessageWithTitle("Your Other Vehicle", myOtherVehicle.ToString()));
         Console.WriteLine(ConsoleHelpers.OutputHelpers.BoxedMessageWithTitle("Your Car", myCar.ToString()));
         Console.WriteLine(ConsoleHelpers.OutputHelpers.BoxedMessageWithTitle("Your Truck", myTruck.ToString())); 
+    }
+    private void AddAVehicle()
+    {
+        Console.WriteLine("AddAVehicle called (not yet implemented).");
+    }
+    private void ShowVehicles()
+    {
+        Console.WriteLine("ShowVehicles called (not yet implemented).");
+    }
+    private void Exit()
+    {
+        Console.WriteLine("Exiting application...");
     }
 }
