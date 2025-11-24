@@ -10,7 +10,6 @@ public class MainMenu
     public MainMenu()
     {
     }
-
     private void ShowFormattedMessages()
     {
         var prompt = "What is your vehicle?";
@@ -118,6 +117,8 @@ public class MainMenu
     private void VehicleTest()
     {
         var myVehicle = new Vehicle(1969, "Oldsmobile", "Cutlass 442", 50000, false);
+        var myCar = new Vehicle.Car(2020, "Ford", "Mustang", 15000, true, true, Vehicle.BodyType.Coupe);
+        var myTruck = new Vehicle.Truck(2019, "Ram", "1500", 42000, true, 6.4, 2100);
         var myOtherVehicle = new Vehicle();
 
         myOtherVehicle.Year = 2018;
@@ -127,6 +128,8 @@ public class MainMenu
         myOtherVehicle.IsAutomatic = true;
 
         Console.WriteLine(ConsoleHelpers.OutputHelpers.BoxedMessageWithTitle("Your Vehicle", myVehicle.ToString()));
-        Console.WriteLine(ConsoleHelpers.OutputHelpers.BoxedMessageWithTitle("Your Other Vehicle", myOtherVehicle.ToString())); 
+        Console.WriteLine(ConsoleHelpers.OutputHelpers.BoxedMessageWithTitle("Your Other Vehicle", myOtherVehicle.ToString()));
+        Console.WriteLine(ConsoleHelpers.OutputHelpers.BoxedMessageWithTitle("Your Car", myCar.ToString()));
+        Console.WriteLine(ConsoleHelpers.OutputHelpers.BoxedMessageWithTitle("Your Truck", myTruck.ToString())); 
     }
 }
