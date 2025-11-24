@@ -19,10 +19,10 @@ public class Application
 
     public async Task DoWork()
     {
-        Console.WriteLine("Welcome to the YourProjectNameHere");
+        Console.WriteLine("Welcome to the Vehicle Manager Application");
 
         await _menu.ShowAsync();
 
-        Console.WriteLine("Thank you for using the YourProjectNameHere");
+        Console.WriteLine("Thank you for using the Vehicle Manager Application. Goodbye!");
     }
 }

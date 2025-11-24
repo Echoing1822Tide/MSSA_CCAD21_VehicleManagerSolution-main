@@ -6,9 +6,6 @@ public class MainMenu
 {
     //private variables for various menus
 
-    
-
-
     //TODO: Inject Menu Dependencies
     public MainMenu()
     {
@@ -16,12 +13,10 @@ public class MainMenu
 
     private void ShowFormattedMessages()
     {
-        var prompt = "What is your name?";
+        var prompt = "What is your vehicle?";
         var response = InputHelpers.GetInputAsString(prompt);
         Console.WriteLine(OutputHelpers.BoxedMessage(response, '*'));
         Console.WriteLine(OutputHelpers.BoxedMessage(response, '-'));
-        string tooLong = "asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf";
-        Console.WriteLine(OutputHelpers.BoxedMessage(tooLong, '-'));
         Console.WriteLine(new string('~', 40));
 
         Console.WriteLine(OutputHelpers.BoxedMessageWithTitle("Welcome", response));
@@ -93,13 +88,17 @@ public class MainMenu
         switch (choice)
         {
             case 1:
-                ShowFormattedMessages();
+                VehicleTest();
                 break;
             case 2:
                 ShowInputHelpers();
                 break;
-            default:
+            case 3:
+                // Exit
                 return false;
+            default:
+                Console.WriteLine("Invalid choice.");
+                break;
         }
 
         Console.WriteLine("Press any key to continue...");
@@ -111,9 +110,23 @@ public class MainMenu
     private string[] GetMenuOptions()
     {
         return new string[] {
-            "Show formatted Messages",
+            "Vehicle Test",
             "Show Input Helpers",
             "Exit"
         };
+    }
+    private void VehicleTest()
+    {
+        var myVehicle = new Vehicle(1969, "Oldsmobile", "Cutlass 442", 50000, false);
+        var myOtherVehicle = new Vehicle();
+
+        myOtherVehicle.Year = 2018;
+        myOtherVehicle.Make = "Toyota";
+        myOtherVehicle.Model = "Corolla";
+        myOtherVehicle.Mileage = 80000;
+        myOtherVehicle.IsAutomatic = true;
+
+        Console.WriteLine(ConsoleHelpers.OutputHelpers.BoxedMessageWithTitle("Your Vehicle", myVehicle.ToString()));
+        Console.WriteLine(ConsoleHelpers.OutputHelpers.BoxedMessageWithTitle("Your Other Vehicle", myOtherVehicle.ToString())); 
     }
 }
