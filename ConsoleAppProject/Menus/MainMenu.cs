@@ -60,7 +60,7 @@ namespace ConsoleAppProject.Menus
                 }
             }
 
-            Console.WriteLine("Goodbye!");
+            Console.WriteLine("Thank you for using the Vehicle Manager Application. Goodbye!");
         }
     }
 }

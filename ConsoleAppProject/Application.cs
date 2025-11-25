@@ -17,8 +17,8 @@ namespace VehicleManager
             var v1 = new VM.Vehicle(2022, "Ford",  "Mustang", 20000, isAutomatic: true);
             var v2 = new VM.Vehicle(2018, "Chevy", "Camaro",   12000, isAutomatic: false);
 
-            Console.WriteLine(OH.BoxedMessageWithTitle("Your Vehicle", v1.ToString()));
-            Console.WriteLine(OH.BoxedMessageWithTitle("Your Vehicle", v2.ToString()));
+            OH.WriteBoxed("Your Vehicle", v1.ToString());
+            OH.WriteBoxed("Your Vehicle", v2.ToString());
             return Task.CompletedTask;
         }
 
@@ -28,21 +28,21 @@ namespace VehicleManager
             var car   = new VM.Car  (2000, "Honda", "Civic",  1000,  isConvertible: true,  bodyType: VM.BodyType.Coupe);
             var truck = new VM.Truck(2025, "Ford",  "F150",   10,    bedLengthFeet: 8.0,   payloadCapacityLbs: 2000);
 
-            Console.WriteLine(OH.BoxedMessageWithTitle("Car",   car.ToString()));
-            Console.WriteLine(OH.BoxedMessageWithTitle("Truck", truck.ToString()));
+            OH.WriteBoxed("Car",   car.ToString());
+            OH.WriteBoxed("Truck", truck.ToString());
             return Task.CompletedTask;
         }
 
         // 3) Add a vehicle (compose first, then add)
         public Task AddVehicleAsync()
         {
-            Console.WriteLine(OH.BoxedMessageWithTitle("Add a Vehicle", "1) Car\n2) Truck"));
+            OH.WriteBoxed("Add a Vehicle", "1) Car\n2) Truck");
             int which = IH.GetInputAsInt("Choose 1 or 2: ", 1, 2, confirm: true);
 
             VM.Vehicle toAdd = (which == 1) ? ComposeCar() : ComposeTruck();
             _garage.Add(toAdd);
 
-            Console.WriteLine(OH.BoxedMessageWithTitle("Added", toAdd.ToString()));
+            OH.WriteBoxed("Added", toAdd.ToString());
             return Task.CompletedTask;
         }
 
@@ -51,11 +51,11 @@ namespace VehicleManager
         {
             if (_garage.Count == 0)
             {
-                Console.WriteLine(OH.BoxedMessageWithTitle("Vehicles", "No vehicles in the garage yet."));
+                OH.WriteBoxed("Vehicles", "No vehicles in the garage yet.");
                 return Task.CompletedTask;
             }
 
-            Console.WriteLine(OH.BoxedMessageWithTitle("Vehicles", $"Total: {_garage.Count}"));
+            OH.WriteBoxed("Vehicles", $"Total: {_garage.Count}");
             for (int i = 0; i < _garage.Count; i++)
                 Console.WriteLine($"[{i + 1}] {_garage[i]}");
 
@@ -77,7 +77,7 @@ namespace VehicleManager
 
         private VM.Car ComposeCar()
         {
-            Console.WriteLine(OH.BoxedMessageWithTitle("Compose Car", "Enter car details"));
+            OH.WriteBoxed("Compose Car", "Enter car details");
             int    year   = IH.GetInputAsInt("Year: ", 1886, 2100, confirm: true);
             string make   = IH.GetInputAsString("Make: ", confirm: true);
             string model  = IH.GetInputAsString("Model: ", confirm: true);
@@ -91,7 +91,7 @@ namespace VehicleManager
 
         private VM.Truck ComposeTruck()
         {
-            Console.WriteLine(OH.BoxedMessageWithTitle("Compose Truck", "Enter truck details"));
+            OH.WriteBoxed("Compose Truck", "Enter truck details");
             int    year     = IH.GetInputAsInt("Year: ", 1886, 2100, confirm: true);
             string make     = IH.GetInputAsString("Make: ", confirm: true);
             string model    = IH.GetInputAsString("Model: ", confirm: true);
