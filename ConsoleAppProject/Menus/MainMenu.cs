@@ -1,4 +1,5 @@
 ﻿using ConsoleHelpers;
+using VehicleModels;
 
 namespace ConsoleAppProject.Menus;
 
@@ -9,49 +10,6 @@ public class MainMenu
     //TODO: Inject Menu Dependencies
     public MainMenu()
     {
-    }
-    private void ShowFormattedMessages()
-    {
-        var prompt = "What is your vehicle?";
-        var response = InputHelpers.GetInputAsString(prompt);
-        Console.WriteLine(OutputHelpers.BoxedMessage(response, '*'));
-        Console.WriteLine(OutputHelpers.BoxedMessage(response, '-'));
-        Console.WriteLine(new string('~', 40));
-
-        Console.WriteLine(OutputHelpers.BoxedMessageWithTitle("Welcome", response));
-    }
-
-    private void ShowInputHelpers()
-    {
-        string prompt = "Please enter your favorite constant";
-        double min = 0;
-        double max = 100;
-        
-        double result = InputHelpers.GetInputAsDouble(prompt, min, max, true);
-        Console.WriteLine($"You entered {result}");
-
-        prompt = "Guess a number between 1 and 7";
-        int intMin = 1;
-        int intMax = 7;
-        int intResult = InputHelpers.GetInputAsInt(prompt, intMin, intMax, true);
-        Console.WriteLine($"You guessed {intResult}");
-
-        prompt = "Would you like to continue?";
-        bool boolResult = InputHelpers.GetInputAsBool(prompt, true);
-        Console.WriteLine($"continue: {(boolResult? "yes" : "no")}");
-
-        var prompt2 = "IS C# the best language?";
-        bool boolResult2 = InputHelpers.GetInputAsBool(prompt2);
-        Console.WriteLine($"give up: {(boolResult2? "yes" : "no")}");
-
-        // String method
-        var prompt3 = "What is your name?";
-        string stringResult = InputHelpers.GetInputAsString(prompt3);
-        Console.WriteLine($"Hello {stringResult}!");
-
-        var prompt4 = "Enter your name again";
-        string stringResult2 = InputHelpers.GetInputAsString(prompt4, true);
-        Console.WriteLine($"Hello again {stringResult2}!");
     }
 
     public async Task ShowAsync()
@@ -80,65 +38,75 @@ public class MainMenu
             }
         }
     }
-    private string[] GetMenuOptions()
-    {
-        return new string[] {
-            "Add a Vehicle",
-            "Show Vehicles",
-            "Exit"
-        };
-    }
+
     //handle user choice
     private async Task<bool> HandleMenuChoiceAsync(int choice)
     {
         switch (choice)
         {
+            //TODO: Switch this to use Vehicle methods
+            //      - Add a Vehicle
+            //      - List Vehicles
+            //      - Get a single vehicle details
+            //      - Update a vehicle
+            //      - Remove a vehicle
+            //      - Save Vehicles to file
+            //      - Load Vehicles from file
             case 1:
-                AddAVehicle();
+                VehicleTest();
                 break;
             case 2:
-                ShowVehicles();
+                CarAndTruckTesting();
                 break;
-            case 3:
-                Exit();
-                return false;
             default:
-                Console.WriteLine("Invalid choice.");
-                break;
+                return false;
         }
+
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
         return true;
     }
+
     //get menu options
+    private string[] GetMenuOptions()
+    {
+        return new string[] {
+            "Vehicle Test",
+            "Car and Truck Testing",
+            "Exit"
+        };
+    }
+
     private void VehicleTest()
     {
-        var myVehicle = new Vehicle(1969, "Oldsmobile", "Cutlass 442", 50000, false);
-        var myCar = new Vehicle.Car(2020, "Ford", "Mustang", 15000, true, true, Vehicle.BodyType.Coupe);
-        var myTruck = new Vehicle.Truck(2019, "Ram", "1500", 42000, true, 6.4, 2100);
+        // Construct a vehicle and display it
+        var myVehicle = new Vehicle(2022, "Ford", "Maverick", 20000, true);
         var myOtherVehicle = new Vehicle();
 
         myOtherVehicle.Year = 2018;
-        myOtherVehicle.Make = "Toyota";
-        myOtherVehicle.Model = "Corolla";
-        myOtherVehicle.Mileage = 80000;
-        myOtherVehicle.IsAutomatic = true;
+        myOtherVehicle.Make = "Chevy";
+        myOtherVehicle.Model = "Camaro";
+        myOtherVehicle.Mileage = 0.5;
+        myOtherVehicle.IsAutomatic = false;
 
-        Console.WriteLine(ConsoleHelpers.OutputHelpers.BoxedMessageWithTitle("Your Vehicle", myVehicle.ToString()));
-        Console.WriteLine(ConsoleHelpers.OutputHelpers.BoxedMessageWithTitle("Your Other Vehicle", myOtherVehicle.ToString()));
-        Console.WriteLine(ConsoleHelpers.OutputHelpers.BoxedMessageWithTitle("Your Car", myCar.ToString()));
-        Console.WriteLine(ConsoleHelpers.OutputHelpers.BoxedMessageWithTitle("Your Truck", myTruck.ToString())); 
+
+
+
+        Console.WriteLine(OutputHelpers.BoxedMessageWithTitle("Your Vehicle",myVehicle.ToString()));
+        Console.WriteLine(OutputHelpers.BoxedMessageWithTitle("Your Vehicle",myOtherVehicle.ToString()));
     }
-    private void AddAVehicle()
+
+    private void CarAndTruckTesting()
     {
-        Console.WriteLine("AddAVehicle called (not yet implemented).");
+        var car1 = new Car(2000, "Honda", "Civic", 1000, true, true, BodyType.Coupe);
+        Console.WriteLine(OutputHelpers.BoxedMessageWithTitle("Your Vehicle", car1.ToString()));
+
+        var truck1 = new Truck(2025, "Ford", "F150", 10, true, 8, 2000);
+        Console.WriteLine(OutputHelpers.BoxedMessageWithTitle("Your Vehicle", truck1.ToString()));
     }
-    private void ShowVehicles()
-    {
-        Console.WriteLine("ShowVehicles called (not yet implemented).");
-    }
-    private void Exit()
-    {
-        Console.WriteLine("Exiting application...");
-    }
+
+
+
+
+
 }
