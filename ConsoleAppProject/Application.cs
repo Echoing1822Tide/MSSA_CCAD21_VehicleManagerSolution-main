@@ -14,7 +14,7 @@ namespace VehicleManager
         // 1) Simple base-type demo
         public Task VehicleTestAsync()
         {
-            var v1 = new VM.Vehicle(2022, "Ford",  "Maverick", 20000, isAutomatic: true);
+            var v1 = new VM.Vehicle(2022, "Ford",  "Mustang", 20000, isAutomatic: true);
             var v2 = new VM.Vehicle(2018, "Chevy", "Camaro",   12000, isAutomatic: false);
 
             Console.WriteLine(OH.BoxedMessageWithTitle("Your Vehicle", v1.ToString()));
