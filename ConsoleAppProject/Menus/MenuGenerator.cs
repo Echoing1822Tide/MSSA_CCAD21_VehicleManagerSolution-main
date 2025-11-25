@@ -1,34 +1,27 @@
 ﻿using System.Text;
 
-namespace ConsoleAppProject.Menus;
-
-public class MenuGenerator
+namespace ConsoleHelpers
 {
-    public static string GenerateMenu(string menuHeader, string menuPrompt, string[] menuLines, int lineLength)
+    public static class MenuGenerator
     {
-        var sb = new StringBuilder();
-        //Header
-        sb.AppendLine(new string('*', lineLength));
-        sb.AppendLine(menuHeader);
-        sb.AppendLine(new string('*', lineLength));
-        //prompt
-        sb.AppendLine($"* {menuPrompt}");
-        sb.AppendLine(new string('-', lineLength));
-        //menu
-        int i = 1;
-        foreach (var line in menuLines)
+        // Simple 4-parameter version used everywhere
+        public static string GenerateMenu(string menuHeader, string menuPrompt, string[] menuLines, int lineLength)
         {
-            sb.AppendLine($"{i++}] {line}");
+            var sb = new StringBuilder();
+            sb.AppendLine(new string('*', lineLength));
+            sb.AppendLine($"* {menuHeader}".PadRight(lineLength - 1) + "*");
+            sb.AppendLine(new string('*', lineLength));
+            sb.AppendLine($"* {menuPrompt}".PadRight(lineLength - 1) + "*");
+            sb.AppendLine($"*{new string('-', lineLength - 2)}*");
+            for (int i = 0; i < menuLines.Length; i++)
+            {
+                sb.AppendLine($"* {i + 1}) {menuLines[i]}".PadRight(lineLength - 1) + "*");
+            }
+            sb.AppendLine(new string('*', lineLength));
+            return sb.ToString();
         }
-        sb.AppendLine(new string('*', 40));
-        return sb.ToString();
-    }
 
-    public static string GenerateMenu(string menuHeader
-                                            , string menuPrompt
-                                            , List<string> menuOptions
-                                            , int lineLength)
-    {
-        return GenerateMenu(menuHeader, menuPrompt, menuOptions.ToArray(), lineLength);
+        public static string GenerateMenu(string menuHeader, string menuPrompt, System.Collections.Generic.List<string> menuOptions, int lineLength)
+            => GenerateMenu(menuHeader, menuPrompt, menuOptions.ToArray(), lineLength);
     }
 }

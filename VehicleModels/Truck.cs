@@ -1,26 +1,20 @@
-namespace VehicleModels;
-
-public class Truck: Vehicle
+namespace VehicleModels
 {
-    public double BedLength {get;set;}
-
-    public double PayloadCapacity {get; set;}
-
-    public Truck(): base()
+    public class Truck : Vehicle
     {
+        public double BedLengthFeet { get; set; }
+        public int PayloadCapacityLbs { get; set; }
 
-    }
+        public Truck() {}
 
-    public Truck (int year, string make, string model, double mileage, 
-                bool isAutomatic, double bedLength, double payloadCapacity) 
-                :base(year, make, model, mileage, isAutomatic)
-    {
-        BedLength = bedLength;
-        PayloadCapacity = payloadCapacity;
-    }
+        public Truck(int year, string make, string model, int mileage, double bedLengthFeet, int payloadCapacityLbs, bool isAutomatic = true)
+            : base(year, make, model, mileage, isAutomatic)
+        {
+            BedLengthFeet = bedLengthFeet;
+            PayloadCapacityLbs = payloadCapacityLbs;
+        }
 
-    public override string ToString()
-    {
-        return $"{base.ToString()}  Bed length: {BedLength} ft  Payload capacity: {PayloadCapacity} lbs";
+        public override string Describe()
+            => base.Describe() + $" | Bed: {BedLengthFeet:0.##} ft | Payload: {PayloadCapacityLbs:n0} lbs";
     }
 }

@@ -1,29 +1,20 @@
-namespace VehicleModels;
-
-public class Car: Vehicle
+namespace VehicleModels
 {
-    public bool IsConvertible {get; set;}
-    public BodyType BodyType { get; set; }
-    
-    public Car (int year, string make, string model, double mileage, 
-                bool isAutomatic, bool isConvertible, BodyType bodyType)
-                : base(year, make, model, mileage, isAutomatic)
+    public class Car : Vehicle
     {
-        IsConvertible = isConvertible;
-        BodyType = bodyType;
+        public bool IsConvertible { get; set; }
+        public BodyType BodyType { get; set; }
+
+        public Car() {}
+
+        public Car(int year, string make, string model, int mileage, bool isConvertible, BodyType bodyType, bool isAutomatic = true)
+            : base(year, make, model, mileage, isAutomatic)
+        {
+            IsConvertible = isConvertible;
+            BodyType = bodyType;
+        }
+
+        public override string Describe()
+            => base.Describe() + $" | {(IsConvertible ? "Convertible" : "Hardtop")} | Body: {BodyType}";
     }
-
-    public Car() : base()
-    {
-
-    }
-
-    public override string ToString()
-    {
-        return $"{base.ToString()}  Convertible: {(IsConvertible? "Yes" : "No")}  Body Type: {BodyType}";
-    }
-    
-
-
-    
 }
